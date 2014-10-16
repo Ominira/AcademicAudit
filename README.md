@@ -13,7 +13,7 @@ This is a prototype web app/system created to automate the sequence of events en
 
 - Java JDK 1.7.0_21
 - Ant 1.9.1
-- MySQL Workbench 6.0 ( or whatever mysql server gui manager suits, phpmyadmin or the likes)
+- MySQL GRT Tools (GUI manager, and connector libraries)
 
 #### Back-end:
 
@@ -69,13 +69,22 @@ JS Utilities:
 CSS Utils:
 - Bootstrap - for the little things
 
+#### Installation
+- Pull into server Webapp folder
+- Update dbHelper java source file with mysql credentials (check under the shared folder in WEB-INF/classes).
+- compile java source files in WEB-INF/classes (left there for easy compilation).
+- create database db_faas in mysql instance.
+- import sql file into db_faas database, to be found in resource/db_faas.sql.
+- start server, and navigate to directory.
+- Additional configurations might be required based on your environment settings.
+
 #### Current Test Site
+
 http://academicaudit.ominira.cloudbees.net/
 
-link expires Dec 31, 2014
+Test site link expires Dec 31, 2014
 
 Usable Login Credentials:
-
 - Student: userame -> user1, password -> user1
 - Lecturer userame -> lecturer1, password -> lecturer1
 
