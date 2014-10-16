@@ -1,0 +1,321 @@
+<div class="pages">
+	<div class="content-header orange-font">
+		<h1 data-ng-bind="title"></h1>
+	</div>
+	<div class="page-contents">
+		<div class="col-lg-12 form-container">
+			<form role="form" name="auditForm" class="form-horizontal animate-switch-container" data-ng-switch on="activeform">
+				<div data-ng-form="sectionForm1" class="animate-switch sub-form" role="form" data-ng-switch-default>
+					<fieldset>
+						<legend class="white-font text-center"><span class="red-font">Step 1:</span> Enter The Following Audit Information <span color="orange">(All details are required)</span></legend>
+						<div class="form-group">
+							<label for="mentor" class="col-lg-4 control-label ctrl-label-2">Advisor&rsquo;s Name</label>
+							<div class="col-lg-4">
+								<select name="advisor" class="form-control input-sm" data-ng-model="auditData.mentorId" data-ng-options="ac.academicId as ac.academicName for ac in Academics" required></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="contacts" class="col-lg-4 control-label ctrl-label-2">Contact Number</label>
+							<div class="col-lg-4">
+								<input type="text" id="contacts" class="form-control input-sm" data-ng-bind="auditData.contact" data-ng-model="auditData.contact" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="cgpa" class="col-lg-4 control-label ctrl-label-2">Current CGPA</label>
+							<div class="col-lg-4">
+								<input type="text" id="cgpa" class="form-control input-sm" data-ng-bind="auditData.cgpa" data-ng-model="auditData.cgpa" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="gradsession" class="col-lg-4 control-label ctrl-label-2">Graduating Session</label>
+							<div class="col-lg-4">
+								<select type="text" id="gradsession" class="form-control input-sm" data-ng-model="auditData.gradSession" required>
+									<option value=""></option>
+									<option value="1/13/34">1/13/34</option>
+									<option value="2/13/34">2/13/34</option>
+									<option value="3/13/34">3/13/34</option>
+									<option value="1/14/34">1/14/34</option>
+									<option value="2/14/34">2/14/34</option>
+									<option value="3/14/34">3/14/34</option>
+									<option value="1/15/34">1/15/34</option>
+									<option value="2/15/34">2/15/34</option>
+									<option value="3/15/34">3/15/34</option>
+									<option value="1/16/34">1/16/34</option>
+									<option value="2/16/34">2/16/34</option>
+									<option value="3/16/34">3/16/34</option>
+									<option value="1/16/34">1/17/34</option>
+									<option value="2/16/34">2/17/34</option>
+									<option value="3/16/34">3/17/34</option>
+									<option value="1/16/34">1/18/34</option>
+									<option value="2/16/34">2/18/34</option>
+									<option value="3/16/34">3/18/34</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="extendedSem" class="col-lg-4 control-label ctrl-label-2">Any Extended Semester?</label>
+							<div class="col-lg-4">
+								<input type="radio" name="extendedSem" id="extensionOption_1" value="Yes" data-ng-model="auditData.extendedSem" required />
+								<span></span>
+								<label class="white-font">Yes</label>
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<input type="radio" name="extendedSem" id="extensionOption_2" value="No" data-ng-model="auditData.extendedSem" />
+								<span></span>
+								<label class="white-font">No</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="totalsem" class="col-lg-4 control-label ctrl-label-2">Total Semesters Taken</label>
+							<div class="col-lg-4">
+								<input type="number" id="totalsem" class="form-control input-sm" data-ng-bind="auditData.totalSem" data-ng-model="auditData.totalSem" required />
+								<span class="yellow-font"><em>*(including extended and defered semester)</em></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="studentType" class="col-lg-4 control-label ctrl-label-2">Student Orientation</label>
+							<div class="col-lg-4">
+								
+								<input type="radio" id="orientationOpt_1" value="International" data-ng-model="auditData.orientationOpt" required />
+								<span></span>
+								<label class=" white-font">International Student</label>
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<input type="radio" id="orientationOpt_2" value="Local" data-ng-model="auditData.orientationOpt" />
+								<span></span>
+								<label class=" white-font">Local Student</label>
+								
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="ce_ct" class="col-lg-4 control-label ctrl-label-2">Any CE/CT Records</label>
+							<div class="col-lg-4">
+								<input type="radio" id="cectOpt_1" value="Yes" data-ng-model="auditData.cectOpt" required>
+								<span></span>
+								<label class="white-font">Yes</label>
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<input type="radio" id="cectOpt_2" data-ng-model="auditData.cectOpt" value="No">
+								<span></span>
+								<label class="white-font">No</label>
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span class="yellow-font"><em>*(Credit Exemption or Credit Transfer)</em></span>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div data-ng-form="sectionForm2" class="animate-switch sub-form" data-ng-switch-when="2">
+					<fieldset>
+						<legend class="white-font text-center"><span class="red-font">Step 2:</span> You only need to fill this section, if you are a local student</legend>
+						<div class="form-group">
+							<label for="spmResult" class="col-lg-3 control-label ctrl-label-2">SPM BM Results</label>
+							<div class="col-lg-3">
+								<select type="text" id="spmResult" class="form-control input-sm" data-ng-model="auditData.spmResult">
+									<option value="NA">N/A</option>
+									<option value="1A">1A</option>
+									<option value="2A">2A</option>
+									<option value="3B">3B</option>
+									<option value="4B">4B</option>
+									<option value="5C">5C</option>
+									<option value="6C">6C</option>
+									<option value="7D">7D</option>
+									<option value="9G">9G</option>
+								</select>
+							</div>
+							<label for="muetResult" class="col-lg-2 control-label ctrl-label-2 text-left">MUET Results</label>
+							<div class="col-lg-3">
+								<select type="text" id="muetResult" class="form-control input-sm text-left" data-ng-model="auditData.muetResult">
+									<option value="NA">N/A</option>
+									<option value="Band 6">Band 6</option>
+									<option value="Band 5">Band 5</option>
+									<option value="Band 4">Band 4</option>
+									<option value="Band 3">Band 3</option>
+									<option value="Band 2">Band 2</option>
+									<option value="Band 1">Band 1</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-12 text-center notification">
+								<span class="yellow-font text-center medium-font">
+									<h4 class="red-font">IMPORTANT!!</h4>
+									Drag and drop your spm and muet result <span class="white-font">BELOW</span>, please make sure
+									to name the result file with your matric number e.g. 4102007651_spm.jpg 
+									and 4102007651_muet.jpg respectively.......
+								</span>
+							</div>
+							<div class="col-lg-12 text-center">
+								<div id="dropbox" class="dropzone" data-drop-box></div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div data-ng-form="sectionForm3" class="animate-switch sub-form" data-ng-switch-when="3">
+					<fieldset>
+						<legend class="white-font text-center">Seeing this section means you acknowledged to have done Credit Exemption/Credit Transfer</legend>
+						<div class="form-group white-font text-center medium-font" data-ng-show="noCT">
+							<p>
+								If you're reading this message, it means there's no record of
+								your course transfer in our database, please check to make sure
+								you've actually done a Credit Exemptions/Credit Transfer or just 
+								click next if you're here by "accident".If you're sure to have 
+								actually done any credit exemption or transfer whatsoever, please 
+								click the <span class="yellow-font">REMARK</span> button below
+							</p>
+							<p>
+								<button class="btn btn-lg btn-info active" data-target="#courseRemark" data-toggle="modal">Remark</button>
+							</p>
+						</div>
+						<div class="form-group white-font text-center" data-ng-show="showCT">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped table-hover">
+									<thead>
+										<tr style="background-color: #d9edf7">
+											<th>#</th>
+											<th>Course ID</th>
+											<th>Course Name</th>
+											<th>Course Grade</th>
+											<th>Grade Point</th>
+											<th>CECT Type</th>
+										</tr>
+									</thead>
+									<tbody class="">
+										<tr data-ng-repeat="data in CtData" data-ng-class="{'success': $even}">
+											<td data-ng-bind="$index + 1"></td>
+											<td data-ng-bind="data.courseId"></td>
+											<td data-ng-bind="data.courseName"></td>
+											<td data-ng-bind="data.courseGrade"></td>
+											<td data-ng-bind="data.courseGp"></td>
+											<td data-ng-bind="data.transType"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div data-ng-form="sectionForm4" class="animate-switch sub-form" data-ng-switch-when="4">
+					<fieldset>
+						<legend class="white-font text-center">Audit Request Information Complete</legend>
+					</fieldset>
+					<div class="form-group white-font text-center medium-font">
+						<p>
+							Your Audit Information as collected is now prepared for submission,
+							please click the send button to enable forwarding to appropriate
+							quaters.
+						</p>
+						<span><p></p><p></p></span>
+						<p>
+							<img src="images/icons/accept.png" />
+						</p>
+					</div>
+					<p></p>
+					<div class="form-group text-center">
+						<div class="alert alert-success alert-dismissable" data-ng-show="alert.isSent">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Sent!</strong> Your Audit request has been sent for review.
+						</div>
+						<div class="alert alert-info alert-dismissable" data-ng-show="alert.isApproved">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Heads Up!</strong> Your Audit request has already been approved, no point in re-applying.
+						</div>
+						<div class="alert alert-info alert-dismissable" data-ng-show="alert.isPending">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Sabar la!</strong> Your Audit Request is still pending, please be patient.
+						</div>
+						<div class="alert alert-warning alert-dismissable" data-ng-show="alert.isFailed">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Oops!</strong> Your Audit Request submission failed, change some few things and try again 
+						</div>
+						<div class="alert alert-danger alert-dismissable" data-ng-show="alert.isEpicFail">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Sorry!</strong> We have trouble processing your request now, please try again later
+						</div>
+						<!--The following alerts are for the course remarks-->
+						<div class="alert alert-success alert-dismissable" data-ng-show="alert.isOK">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Yay!</strong> And your CE/CT course remark has been noted!
+						</div>
+						<div class="alert alert-warning alert-dismissable" data-ng-show="alert.isFail">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Unfortunately!</strong> We cannot seem to process your CE/CT course remark right now<br/>
+							We advise that you contact your mentor directly for further instructions. 
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="button-holder btn-back" data-ng-show="activeform != 1">
+				<button class="btn btn-danger active" data-ng-bind="buttons.back" data-ng-click="prevForm()"></button>
+			</div>
+			<div class="progress progress-striped active text-center">
+				<div class="progress-bar progress-bar-danger" role="progressbar" data-aria-valuenow="0" data-aria-valuemin="0" data-aria-valuemax="100" data-ng-style="progressIncrement"></div>
+				<span class="" data-ng-bind="barCurrentValue"></span>
+			</div>
+			<div class = "button-holder btn-next">
+				<button class="btn btn-danger active" data-ng-bind="buttons.next" data-ng-click="nextForm()" data-ng-disabled="auditForm.sectionForm1.$invalid"></button>
+			</div>
+		</div>
+		<div class="modal fade remark-window" id="courseRemark" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" data-aria-hidden="true" style="background: red">&times;</button>
+						<h3 class="orange-font" style="font-family: cambria">Audit Remark for Credit Exemption and Transfer</h3>
+					</div>
+					<div class="modal-body">
+						<div role="form" data-ng-form="remarkForm" class="form-horizontal">
+							<div class="form-group">
+								<label for="course" class="control-label col-md-2 yellow-font">Course</label>
+								<div class="col-md-8">
+									<select class="form-control" data-ng-model="selectedCourse" data-ng-options="course.courses for course in Courses" required></select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="result" class="control-label col-md-2 yellow-font">Result Type</label>
+								<div class="col-md-8">
+									<select type="text" name="cectResult" class="form-control" data-ng-model="selectedResult" required>
+										<option value=""></option>
+										<option value="Credit Exemption">Credit Exemption</option>
+										<option value="Credit Transfer">Credit Transfer</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="comments" class="control-label col-md-2 yellow-font">Any Specific Comments</label>
+								<div class="col-md-8">
+									<textarea class="form-control" name="comments" row="5" col="10" data-ng-model="selectedComments" required></textarea>
+								</div>
+							</div>
+							<div class-"form-group text-center">
+								<button class="btn btn-large btn-success text-center remark-button" data-ng-click="doRemark()" data-ng-disabled="remarkForm.$invalid">Remark</button>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-condensed">
+								<thead>
+									<tr class="active" sytle="text-align: center">
+										<th>#</th>
+										<th>Course Code</th>
+										<th>Course Name</th>
+										<th>Course Units</th>
+										<th>Result Type</th>
+										<th>Comments</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody class="table-hover table-striped ">
+									<tr data-ng-repeat="data in remarkedCourses" class="success">
+										<td data-ng-bind="$index + 1"></td>
+										<td data-ng-bind="data.courseId"></td>
+										<td data-ng-bind="data.courseName"></td>
+										<td data-ng-bind="data.courseUnits"></td>
+										<td data-ng-bind="data.cectResult"></td>
+										<td data-ng-bind="data.comments"></td>
+										<td><button class="btn btn-danger btn-xs" data-ng-click="doDelete($index)">Remove</button></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

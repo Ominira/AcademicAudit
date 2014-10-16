@@ -1,0 +1,211 @@
+<div class="pages">
+	<div class="content-header orange-font">
+		<h1 data-ng-bind="title"></h1>
+	</div>
+	<div class="page-contents">
+
+		<ul class="nav nav-tabs" id="page-tab-nav">
+			<li class="active">
+				<a data-target="#tabs-1" data-toggle="tab">Calculate Semester GPA and CGPA</a>
+			</li>
+			<li>
+				<a data-target="#tabs-2" data-toggle="tab">Calculate GPA Required for a Target CGPA</a>
+			</li>
+			<li>
+				<a data-target="#tabs-3" data-toggle="tab">Calculate Credit Hours Required for a target CGPA</a>
+			</li>
+		</ul>
+
+		<div class="tab-content">
+			<div class="tab-pane fade in active" id="tabs-1">
+				<div data-ng-form="gradesForm" role="form" class="form-horizontal tools-form">
+					<fieldset>
+						<legend class="white-font">Calculate Semester GPA and CGPA based on anticipated grades - Enter the followng Information</legend>
+						<div class="form-group">
+							<label for="current_cgpa" class="col-md-2 control-label white-font">Current CGPA</label>
+							<div class="col-md-1">
+								<input type="text" size="5" tabindex="1" name="current_cgpa" data-ng-model="gradesData.currentCgpa" class="form-control"/>
+							</div>
+							<label for="current_units" class="col-md-3 text-left control-label white-font">Number of Credit Hours Taken (<span class="yellow-font">*including subject with grade F</span>)</label>
+							<div class="col-md-1">
+								<input type="text" size="5" tabindex="2" name="current_units" data-ng-model="gradesData.currentUnits" class="form-control"/>
+							</div>
+							<label for="numOf_subject" class="col-md-3 control-label white-font">Number Of Subjects for this Semeser</label>
+							<div class="col-md-1">
+								<input type="number" min="0" max="8" step="1" tabindex="3" name="numOf_subjects" data-ng-model="numOfTextbox" class="form-control" data-ng-change="generateBox()"/>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<form role="form" class="form-horizontal tools-form">
+					<fieldset>
+						<legend class="white-font">Enter Grades</legend>
+						<div class="table-responsive col-md-7">
+							<table class="table table-condensed table-bordered">
+								<thead>
+									<tr class="white-font">
+										<th>Grade</th>
+										<th>Grade Point Value</th>
+										<th>Course Credit Hour</th>
+										<th>Course Grade Point</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-ng-repeat="t in generateTextbox(numOfTextbox) track by $index" class="text-center">
+										<td class="col-md-2">
+											<select data-ng-change="gradesChange($index)" class="form-control" data-ng-model="gradesData.grade[$index]" data-ng-options="g.gradeValue as g.letterGrade for g in Grades" required>
+												<option value="">?</option>
+											</select>
+										</td>
+										<td class="col-md-2">
+											<input type="text" class="form-control col-md-1" data-ng-model="gradesData.gradeGp[$index]" readonly="true"/>
+										</td>
+										<td>
+											<label for="" class="col-md-1 control-label yellow-font">x</label>
+											<div class="col-md-9">
+												<input type="number" class="form-control" min="0" max="8" step="0.5" data-ng-model="gradesData.units[$index]" data-ng-change="unitsChange($index)"/>
+											</div>
+										</td>
+										<td>
+											<label for="" class="col-md-1 control-label yellow-font">=</label>
+											<div class="col-md-9">
+												<input type="text" data-ng-model="gradesData.points[$index]" class="form-control" readonly="true"/>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="col-md-5">
+							<div data-ng-form="resultForm" role="form" class="form-horizontal">
+								<div class="form-group">
+									<label for="totalUnits" class="control-label col-md-5 white-font">Total Credit Units</label>
+									<div class="col-md-3">
+										<input type="text" data-ng-model="results.totalUnits" readonly="true" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="totalPoints" class="control-label col-md-5 white-font">Total Grade Points</label>
+									<div class="col-md-3">
+										<input type="text" data-ng-model="results.totalPoints" readonly="true" class="form-control"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="gpa" class="control-label col-md-5 white-font">GPA</label>
+									<div class="col-md-3">
+										<input type="text" data-ng-model="results.gpa" readonly="true" class="form-control"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="cgpa" class="control-label col-md-5 white-font">CGPA</label>
+									<div class="col-md-3">
+										<input type="text" data-ng-model="results.cgpa" readonly="true" class="form-control"/>
+									</div>
+								</div>
+								<div class="form-group actionButtons-holder">
+									<button class="btn btn-danger active col-md-3 actionButtons" data-ng-click="calculate()">Calculate</button>
+									<button class="btn active col-md-1 actionButtons">:</button>
+									<button class="btn btn-danger active col-md-3 actionButtons" data-ng-click="reset()" data-ng-disabled="resetAble">Reset</button>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div class="tab-pane fade" id="tabs-2">
+				<div data-ng-form="gradeForecastForm" role="form" class="form-horizontal tools-form">
+					<fieldset>
+						<legend class="white-font">Calculate GPA to maintain to reach target CGPA - Enter the followng Information</legend>
+						<div class="col-md-10">
+							<div class="form-group">
+								<label for="currentCgpa" class="control-label col-md-7 ctrl-label-2 white-font">Current CGPA</label>
+								<div class="col-md-2">
+									<input type="number" min="0.01" max="4.0" step="0.01" data-ng-model="gradeForecaster.currentCgpa" class="form-control" required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="currentUnits" class="control-label col-md-7 ctrl-label-2 white-font">
+									Number of Credit Hours Taken (<span class="yellow-font">Including courses where F was earned</span>)
+								</label>
+								<div class="col-md-2">
+									<input type="number" min="1" step="0.5" data-ng-model="gradeForecaster.currentUnits" class="form-control" required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="targetCgpa" class="control-label col-md-7 ctrl-label-2 white-font">Target CGPA</label>
+								<div class="col-md-2">
+									<input type="number" min="0.01" max="4.00" step="0.01" data-ng-model="gradeForecaster.targetCgpa" class="form-control" required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="remainingUnits" class="control-label col-md-7 ctrl-label-2 white-font">Remaining Credit Hours</label>
+								<div class="col-md-2">
+									<input type="number" min="1" step="0.5" data-ng-model="gradeForecaster.remainingUnits" class="form-control" required/>
+								</div>
+							</div>
+							<div class="form-group actionButtons-holder">
+								<button class="btn btn-danger active col-md-2 actionButtons" data-ng-click="computeTarget()" data-ng-disabled="gradeForecastForm.$invalid">Compute Target</button>
+								<button class="btn active col-md-1 actionButtons">:</button>
+								<button class="btn btn-danger active col-md-2 actionButtons" data-ng-click="resetTarget()" data-ng-disabled="deActivateReset">Reset</button>
+							</div>
+							<div class="form-group actionOutput">
+								<label for="computedTarget" class="control-label col-md-5 ctrl-label-2 white-font">You need to maintain a GPA of</label>
+								<div class="col-md-3">
+									<input type="text" data-ng-model="gradeForecaster.computedTarget" class="form-control text-center text-bolder input-lg" readonly="true"/>
+								</div>
+								<label for="computedTarget" class="control-label col-md-3 ctrl-label-2 white-font text-left">In your remaining courses</label>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="tabs-3">
+				<div data-ng-form="unitsForecastForm" role="form" class="form-horizontal tools-form">
+					<fieldset>
+						<legend class="white-font">Calculate Credit Units Required For a target CGPA - Enter the followng Information</legend>
+						<div class="col-md-10">
+							<div class="form-group">
+								<label for="currentCgpa" class="control-label col-md-7 ctrl-label-2 white-font">Current CGPA</label>
+								<div class="col-md-2">
+									<input type="number" min="0.01" max="4.0" step="0.01" data-ng-model="unitForecaster.currentCgpa" class="form-control" required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="currentUnits" class="control-label col-md-7 ctrl-label-2 white-font">
+									Number of Credit Hours Taken (<span class="yellow-font">Including courses where F was earned</span>)
+								</label>
+								<div class="col-md-2">
+									<input type="number" min="1" step="0.5" data-ng-model="unitForecaster.currentUnits" class="form-control" required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="targetCgpa" class="control-label col-md-7 ctrl-label-2 white-font">Target CGPA</label>
+								<div class="col-md-2">
+									<input type="number" min="0.01" max="4.00" step="0.01" data-ng-model="unitForecaster.targetCgpa" class="form-control" required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="targetGpa" class="control-label col-md-7 ctrl-label-2 white-font">Target GPA for each Semester</label>
+								<div class="col-md-2">
+									<input type="number" min="0.01" max="4.00" step="0.01" data-ng-model="unitForecaster.targetGpa" class="form-control" required/>
+								</div>
+							</div>
+							<div class="form-group actionButtons-holder">
+								<button class="btn btn-danger active col-md-2 actionButtons" data-ng-click="computeUnits()" data-ng-disabled="unitsForecastForm.$invalid">Compute Target</button>
+								<button class="btn active col-md-1 actionButtons">:</button>
+								<button class="btn btn-danger active col-md-2 actionButtons" data-ng-click="resetUnitsForm()" data-ng-disabled="disableReset">Reset</button>
+							</div>
+							<div class="form-group actionOutput">
+								<label for="computedTarget" class="control-label col-md-3 ctrl-label-2 white-font">You need at least</label>
+								<div class="col-md-3">
+									<input type="text" data-ng-model="unitForecaster.computedTarget" class="form-control text-center text-bolder input-lg" readonly="true"/>
+								</div>
+								<label for="computedTarget" class="control-label col-md-5 ctrl-label-2 white-font text-left">additional credit units in your remaining courses</label>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

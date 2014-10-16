@@ -1,0 +1,72 @@
+<div class="pages">
+	<div class="content-header orange-font">
+		<h1 data-ng-bind="title"></h1>
+	</div>
+	<div class="page-contents">
+		<div class="col-md-12 content-holder">
+			<div class="col-md-8 panel-holder">
+				<div class="panel panel-success">
+					<div class="panel-heading">Your Profile</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-striped table-hover">
+								<tbody>
+									<tr>
+										<th>Name</th>
+										<td data-ng-show="profile.academicName != ''" data-ng-bind="profile.academicName"></td>
+										<td data-ng-show="profile.academicName == ''" class="text-danger">No Name Records</td>
+									</tr>
+									<tr>
+										<th>Staff ID</th>
+										<td data-ng-show="profile.academicId != ''" data-ng-bind="profile.academicId"></td>
+										<td data-ng-show="profile.academicId == ''" class="text-danger">No Id Records</td>
+									</tr>
+									<tr>
+										<th>Status</th>
+										<td data-ng-show="profile.academicStatus != ''" data-ng-bind="profile.academicStatus"></td>
+										<td data-ng-show="profile.academicStatus == ''" class="text-danger">No Status Records</td>
+									</tr>
+									<tr>
+										<th>Department</th>
+										<td data-ng-show="profile.academicDept != ''" data-ng-bind="profile.academicDept"></td>
+										<td data-ng-show="profile.academicDept == ''" class="text-danger">No Dept Records</td>
+									</tr>
+									<tr>
+										<th>System Academic Level</th>
+										<td>Academic Advisor</td>
+									</tr>
+									<tr>
+										<th>Email</th>
+										<td data-ng-show="profile.academicEmail != ''" data-ng-bind="profile.academicEmail"></td>
+										<td data-ng-show="profile.academicEmail == ''" class="text-danger">No Email Records</td>
+									</tr>
+									<tr>
+										<th>Phone</th>
+										<td data-ng-show="profile.academicPhone != ''" data-ng-bind="profile.academicPhone"></td>
+										<td data-ng-show="profile.academicPhone == ''" class="text-danger">No Phone Records</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-info">
+					<div class="panel-heading">Edit Academic Profile</div>
+					<div class="panel-body">
+						
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 panel-holder">
+				<div class="panel panel-success">
+					<div class="panel-heading">Audit Requests</div>
+					<div class="panel-body">
+						<button class="btn btn-info" data-ng-click="goToReview()" data-ng-disabled="numOfRequests == 0">
+							<span class="white-font" data-ng-pluralize data-count="numOfRequests" data-when="{'0': 'No Pending Requests','one': '1 Pending Request', 'other':'There are {} pending requests'}"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

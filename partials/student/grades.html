@@ -1,0 +1,82 @@
+<div class="pages">
+	<div class="content-header orange-font">
+		<h1 data-ng-bind="title"></h1>
+	</div>
+	<div class="page-contents">
+		<div class="grades-view-choice">
+			<button class="btn btn-lg active" data-ng-click="showBySem()" data-ng-class="{'btn-info': isBySemActive}">View By Semester
+			<button class="btn btn-lg active" data-ng-click="showAll()" data-ng-class="{'btn-warning': isByCourseActive}">View By Courses</button>
+		</div>
+		<div class="grades-view" data-ng-switch on='activeView'>
+			<div class="by-sem" data-ng-switch-default>
+				<div class="chart-holder">
+					<div data-graph-chart data-ng-model="graph.data"></div>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-condensed table-hover table-striped table-bordered">
+						<thead>
+							<tr style="background-color: #d9edf7">
+								<th>#</th>
+								<th>Semester</th>
+								<th>Status</th>
+								<th>GPA</th>
+								<th>CGPA</th>
+								<th>Credit Hour</th>
+								<th>Grade Point</th>
+								<th>Cummulative Hour</th>
+								<th>Cummulative Point</th>
+							</tr>
+						</thead>
+						<tbody class="">
+							<tr data-ng-repeat="data in semResults" data-ng-class-even="'success'" class="text-center">
+								<td data-ng-bind="$index + 1"></td>
+								<td data-ng-bind="data.semId"></td>
+								<td data-ng-bind="data.status"></td>
+								<td data-ng-bind="data.gpa"></td>
+								<td data-ng-bind="data.cgpa"></td>
+								<td data-ng-bind="data.totalHour"></td>
+								<td data-ng-bind="data.creditPoint"></td>
+								<td data-ng-bind="data.cummulativeHour"></td>
+								<td data-ng-bind="data.cummulativePoint"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="by-course" data-ng-switch-when="1">
+				<div class="table-responsive">
+					<table class="table table-condensed table-hover table-striped table-bordered">
+						<thead>
+							<tr style="background-color: #d9edf7">
+								<th>#</th>
+								<th>Semester</th>
+								<th>Course ID</th>
+								<th>Course Name</th>
+								<th>Grade</th>
+								<th>Grade Point</th>
+								<th>Credit Hours</th>
+								<th>Course Point</th>
+								<th>Cummulative Point</th>
+								<th>Cummulative Hour</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr data-ng-repeat="data in courseResults" data-ng-class-even="'success'" class="text-center">
+								<td data-ng-bind="$index + 1"></td>
+								<td data-ng-bind="data.semId"></td>
+								<td data-ng-bind="data.courseId"></td>
+								<td data-ng-bind="data.description"></td>
+								<td data-ng-bind="data.grade"></td>
+								<td data-ng-bind="data.gradePoint"></td>
+								<td data-ng-bind="data.creditHours"></td>
+								<td data-ng-bind="data.totalGrade"></td>
+								<td data-ng-bind="data.cummulativePoint"></td>
+								<td data-ng-bind="data.cummulativeHour"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+<div>

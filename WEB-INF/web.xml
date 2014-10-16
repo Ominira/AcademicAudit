@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0" metadata-complete="false">
+
+	<context-param> 
+		<description>Location to store uploaded file</description> 
+		<param-name>file-upload</param-name> 
+		<param-value>
+			uploads
+		</param-value>
+	</context-param>
+	
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<scripting-invalid>true</scripting-invalid>
+		</jsp-property-group>
+	</jsp-config>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.jspx</welcome-file>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>default.html</welcome-file>
+    	<welcome-file>default.htm</welcome-file>
+   		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<filter>
+		<filter-name>FilterService</filter-name>
+		<filter-class>com.auditsys.shared.services.FilterService</filter-class>
+		<init-param>
+	  		<param-name>Cache-Control</param-name>
+	  		<param-value>no-cache</param-value>
+   		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>FilterService</filter-name>
+		<url-pattern>/*</url-pattern>
+		<url-pattern>/AcademicMain</url-pattern>
+		<url-pattern>/Main</url-pattern>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<display-name>LoginServlet</display-name>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.auditsys.shared.controllers.LoginServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>LogoutServlet</display-name>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>com.auditsys.shared.controllers.LogoutServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/LogoutServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>AccountService</display-name>
+		<servlet-name>AccountService</servlet-name>
+		<servlet-class>com.auditsys.shared.services.AccountService</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>AccountService</servlet-name>
+		<url-pattern>/AccountService</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>UploadService</display-name>
+		<servlet-name>UploadService</servlet-name>
+		<servlet-class>com.auditsys.shared.services.UploadService</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>UploadService</servlet-name>
+		<url-pattern>/UploadService</url-pattern>
+	</servlet-mapping>
+
+	<!-- <security-constraint>
+		<web-resource-collection>
+			<web-resource-name>AuthServer</web-resource-name>
+			<url-pattern>index.jsp</url-pattern>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint> -->
+</web-app>

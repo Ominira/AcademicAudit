@@ -1,0 +1,86 @@
+<div class="pages">
+	<div class="content-header orange-font">
+		<h1 data-ng-bind="title"></h1>
+	</div>
+	<div class="page-contents">
+		<div class="col-lg-12">
+			<div class="col-lg-2 image-holder">
+				<img data-err-src="images/profile/noprofile.jpg" data-ng-src="images/profile/{{studIc}}.jpg" class="img-responsive" alt="Profile Picture">
+			</div>
+			<div class="col-lg-10">
+				<div class="table-responsive">
+					<table class="table table-striped table-hover table-condensed">
+						<tbody>
+							<tr>
+								<th>Name</th>
+								<td><span data-ng-bind="studName"></span></td>
+							</tr>
+							<tr class="success">
+								<th>Matric Number</th>
+								<td><span data-ng-bind="studId"></span></td> 
+							</tr>
+							<tr>
+								<th>NRIC Number</th>
+								<td><span data-ng-bind="studIc"></span></td>
+							</tr>
+							<tr class="success">
+								<th>Audit Status</th>
+								<td><span data-ng-bind-html="auditStatus" class="{{statusClass}}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="col-lg-12">
+				<div class="table-responsive">
+					<table class="table table-striped table-hover table-condensed">
+						<tbody>
+							<tr>
+								<th>Current Academic Status</th>
+								<td><span data-ng-bind="studStatus"></span></td>
+							</tr>
+							<tr class="success">
+								<th>Program ID</th>
+								<td><span data-ng-bind="studProgramId"></span></td>
+							</tr>
+							<tr>
+								<th>Program Name</th>
+								<td><span data-ng-bind="studProgram"></span></td>
+							</tr>
+							<tr class="success">
+								<th>Program Duration</th>
+								<td><span data-ng-pluralize data-count="programDuration" data-when="{'0': 'UnKnown','one': '1 Year', 'other':'{} Years'}"></span></td>
+							</tr>
+							<tr>
+								<th>Program Type</th>
+								<td><span data-ng-bind="programType"></span></td>
+							</tr>
+							<tr class="success">
+								<th>Credit Units Required</th>
+								<td><span data-ng-pluralize data-count="requiredUnits" data-when="{'0': 'No Credits Unit Required','one': '1 Credit Unit', 'other':'{} Credit Units'}"></span></td>
+							</tr>
+							<tr>
+								<th>Credit Units Taken</th>
+								<td><span data-ng-pluralize data-count="unitsTaken" data-when="{'0': 'No Records Yet','one': '1 Credit Unit', 'other':'{} Credit Units'}"></span></td>
+							</tr>
+							<tr class="success">
+								<th>Current CGPA</th>
+								<td><span data-ng-bind="currentCgpa"></span></td>
+							</tr>
+							<tr>
+								<th>Academic Year Intake</th>
+								<td><span data-ng-bind="studIntake"></span></td>
+							</tr>
+							<tr class="success">
+								<th>Academic Advisor</th>
+								<td><span data-ng-bind="studAdvisor"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

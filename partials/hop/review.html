@@ -1,0 +1,498 @@
+<div class="pages">
+	<div class="content-header orange-font">
+		<h1 data-ng-bind="title"></h1>
+	</div>
+	<div class="page-contents">
+		<div class="table-responsive">
+			<div class="form-group">
+				<label for"filter" class="control-label btn btn-info white-font ctrl-label-2 col-md-2">Search By Program:</label>
+				<div class="col-md-6">
+					<input type="text" name="filter" data-ng-model="filter.program" class="form-control">
+				</div>
+			</div>
+		</div>
+		<div class="table-responsive" data-ng-if="requests">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr style="background-color: #d9edf7">
+						<th>#</th>
+						<th>Matric Number</th>
+						<th>Student Name</th>
+						<th>Program</th>
+						<th>Graduating Session</th>
+						<th>Application Date</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="data in requests | filter:{studProgram: filter.program}" data-ng-class-even="'success'" class="text-center">
+						<td data-ng-bind="$index + 1">&nbsp;</td>
+						<td data-ng-bind="data.studId"></td>
+						<td data-ng-bind="data.studName"></td>
+						<td data-ng-bind="data.studProgram"></td>
+						<td data-ng-bind="data.studGradSession"></td>
+						<td data-ng-bind="data.applicationDate"></td>
+						<td><a class="btn btn-sm btn-danger" data-ng-click="doReview($index)" href="#review-panel" data-fancybox-launch>Review</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12" data-ng-show="requests == ''">
+			<p class="white-font text-center">
+				There are No More Requests to Review
+			</p>
+		</div>
+		<div style="display:none;height:100%;width:100%" id="review-panel">
+			<div class="panel-group" id="accordion">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" data-target="#collapseA">
+								Audit Review - Section A: Student Personal Information
+							</a>
+						</h4>
+					</div>
+					<div id="collapseA" class="panel-collapse collapse in">
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover">
+									<tr>
+										<th>Name</th>
+										<td data-ng-bind="profileData.name"></td>
+										<th>Matric Id</th>
+										<td data-ng-bind="profileData.id"></td>
+									</tr>
+									<tr>
+										<th>Contact No</th>
+										<td><span data-ng-bind="profileData.hp"></span></td>
+										<th>Current CGPA</th>
+										<td data-ng-bind="profileData.currentCgpa"></td>
+									</tr>
+									<tr>
+										<th>Program</th>
+										<td colspan="3" data-ng-bind="profileData.degree"></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" data-target="#collapseB">
+								Audit Review - Section B: Student Audit Information
+							</a>
+						</h4>
+					</div>
+					<div id="collapseB" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover">
+									<tr>
+										<th>Intake</th>
+										<td data-ng-bind="profileData.intake"></td>
+										<th>Program Type</th>
+										<td data-ng-bind="profileData.program"></td>
+									</tr>
+									<tr>
+										<th>Graduating Session</th>
+										<td data-ng-bind="audit.gradSession"></td>
+										<th>Total Semester Taken</th>
+										<td data-ng-bind="audit.totalSem"></td>
+									</tr>
+									<tr>
+										<th>Extended Semester?</th>
+										<td data-ng-bind="audit.extSem"></td>
+										<th>CT/CE Remark</th>
+										<td data-ng-pluralize data-count="audit.cectRemark" data-when="{'0': 'No Remarks', '1': 'Yes'}"></td>
+									</tr>
+									<tr>
+										<th>SPM Result</th>
+										<td data-ng-bind="audit.spmResult"></td>
+										<th>MUET Result</th>
+										<td data-ng-bind="audit.muetResult"></td>
+									</tr>
+									<tr>
+										<th>SPM Result As Uploaded</th>
+										<td>
+											<div class="image-holder">
+												<a href="uploads/{{profileData.id}}_spm.jpg"  title="SPM Result" data-colorbox-preview>
+													<img data-err-src="images/profile/noprofile.jpg" data-ng-src="uploads/{{profileData.id}}_spm.jpg" class="img-responsive" alt="SPM Result"/>
+												</a>
+											</div>
+										</td>
+										<th>MUET Result As Uploaded</th>
+										<td>
+											<div class="image-holder">
+												<a href="uploads/{{profileData.id}}_muet.jpg"  title="MUET Result" data-colorbox-preview>
+													<img data-err-src="images/profile/noprofile.jpg" data-ng-src="uploads/{{profileData.id}}_muet.jpg" class="img-responsive" alt="MUET Result"/>
+												</a>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" data-target="#collapseC">
+								Audit Review - Section C: Student CT/CE Report
+							</a>
+						</h4>
+					</div>
+					<div id="collapseC" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="form-group red-font text-center medium-font" data-ng-show="noCt">
+								<p>
+									This Student Has no CECT Records
+								</p>
+							</div>
+							<div class="table-responsive" data-ng-show="showCt">
+								<table class="table table-bordered table-striped table-hover table-condensed">
+									<thead>
+										<tr style="background-color: #d9edf7">
+											<th>#</th>
+											<th>Course ID</th>
+											<th>Course Name</th>
+											<th>Course Grade</th>
+											<th>Grade Point</th>
+											<th>CECT Type</th>
+										</tr>
+									</thead>
+									<tbody class="">
+										<tr data-ng-repeat="data in CtData" data-ng-class-even="'success'">
+											<td data-ng-bind="$index + 1"></td>
+											<td data-ng-bind="data.courseId"></td>
+											<td data-ng-bind="data.courseName"></td>
+											<td data-ng-bind="data.courseGrade"></td>
+											<td data-ng-bind="data.courseGp"></td>
+											<td data-ng-bind="data.transType"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" data-ng-show="showCtRemark">
+								<table class="table table-bordered table-striped table-hover table-condensed">
+									<thead>
+										<tr class="white-font" style="background-color: rgb(49,79,79)">
+											<th colspan="7">The Following are the CE/CT Remark the Student made</th>
+										</tr>
+										<tr style="background-color: #d9edf7">
+											<th>#</th>
+											<th>Course ID</th>
+											<th>Course Name</th>
+											<th>Course Units</th>
+											<th>Course Status</th>
+											<th>Course CECT Type</th>
+											<th>Remarks Comment</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr data-ng-repeat="ctRemark in CtRemarkData" data-ng-class-even="'success'">
+											<td data-ng-bind="$index + 1"></td>
+											<td data-ng-bind="ctRemark.courseId"></td>
+											<td data-ng-bind="ctRemark.courseName"></td>
+											<td data-ng-bind="ctRemark.courseUnit"></td>
+											<td data-ng-bind="ctRemark.courseStatus"></td>
+											<td data-ng-bind="ctRemark.cectResult"></td>
+											<td data-ng-bind="ctRemark.comments"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" data-target="#collapseD">
+								Audit Review - Section D: Results Review
+							</a>
+						</h4>
+					</div>
+					<div id="collapseD" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped table-hover table-condensed">
+									<thead>
+										<tr class="white-font" style="background-color: rgb(49,79,79)">
+											<th colspan="9">Students Result By Semester</th>
+										</tr>
+										<tr style="background-color: #d9edf7">
+											<th>#</th>
+											<th>Semester</th>
+											<th>Status</th>
+											<th>GPA</th>
+											<th>CGPA</th>
+											<th>Credit Hour</th>
+											<th>Grade Point</th>
+											<th>Cummulative Hour</th>
+											<th>Cummulative Point</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr data-ng-repeat="data in semResults" data-ng-class-even="'success'" class="text-center">
+											<td data-ng-bind="$index + 1"></td>
+											<td data-ng-bind="data.semId"></td>
+											<td data-ng-bind="data.status"></td>
+											<td data-ng-bind="data.gpa"></td>
+											<td data-ng-bind="data.cgpa"></td>
+											<td data-ng-bind="data.totalHour"></td>
+											<td data-ng-bind="data.creditPoint"></td>
+											<td data-ng-bind="data.cummulativeHour"></td>
+											<td data-ng-bind="data.cummulativePoint"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="table-responsive">
+								<table class="table table-condensed table-hover table-striped table-bordered table-condensed">
+									<thead>
+										<tr class="white-font" style="background-color: rgb(49,79,79)">
+											<th colspan="10">Students Results For All Course Taken</th>
+										</tr>
+										<tr style="background-color: #d9edf7">
+											<th>#</th>
+											<th>Semester</th>
+											<th>Course ID</th>
+											<th>Course Name</th>
+											<th>Grade</th>
+											<th>Grade Point</th>
+											<th>Credit Hours</th>
+											<th>Course Point</th>
+											<th>Cummulative Point</th>
+											<th>Cummulative Hour</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr data-ng-repeat="data in courseResults" data-ng-class-even="'success'" class="text-center">
+											<td data-ng-bind="$index + 1"></td>
+											<td data-ng-bind="data.semId"></td>
+											<td data-ng-bind="data.courseId"></td>
+											<td data-ng-bind="data.description"></td>
+											<td data-ng-bind="data.grade"></td>
+											<td data-ng-bind="data.gradePoint"></td>
+											<td data-ng-bind="data.creditHours"></td>
+											<td data-ng-bind="data.totalGrade"></td>
+											<td data-ng-bind="data.cummulativePoint"></td>
+											<td data-ng-bind="data.cummulativeHour"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" data-target="#collapseE">
+								Audit Review - Section E: Audit Review Summary
+							</a>
+						</h4>
+					</div>
+					<div id="collapseE" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover">
+									<tr>
+										<th>Total Credit Passed</th>
+										<td data-ng-bind="profileData.creditHoursTaken"></td>
+									</tr>
+									<tr>
+										<th>Total Credit Exempted</th>
+										<td data-ng-bind="audit.totalCreditExempted"></td>
+									</tr>
+									<tr>
+										<th>Total Credit Earned</th>
+										<td data-ng-bind="profileData.creditHoursTaken + audit.totalCreditExempted"></td>
+									</tr>
+									<tr>
+										<th>Total Credit Required</th>
+										<td data-ng-bind="profileData.totalDegreeUnits"></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group table-responsive actionButtons-holder">
+				<button class="btn btn-info btn-lg active col-md-2 actionButtons" data-target="#approval-panel" data-toggle="modal" data-ng-click="doApproveAudit()">Approve</button>
+				<button class="btn active col-md-1 actionButtons">:</button>
+				<button class="btn btn-danger btn-lg active col-md-2 actionButtons" data-target="#reject-panel" data-toggle="modal" data-ng-click="doRejectAudit()">Reject</button>
+			</div>
+			<div class="modal fade review-window" id="approval-panel" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" data-aria-hidden="true" style="background: red">&times;</button>
+							<h3 class="darkslate-font" style="font-family: cambria">Audit Approval</h3>
+						</div>
+						<div class="modal-body">
+							<div data-ng-form="approvalForm" role="form">
+								<div class="form-group">
+									<label for="commentBox">Please leave a Comment (<span class="red-font">It is Required!</span>)</label>
+									<textarea class="form-control" name="comments" row="5" col="10" data-ng-model="ApprovalComments" required></textarea>
+								</div>
+							</div>
+							<div class="alert alert-success alert-dismissable" data-ng-show="alert.isApprovedOK">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								<strong>Hurray!</strong> Audit Status Update was successful. Audit Approved! 
+							</div>
+							<div class="alert alert-warning alert-dismissable" data-ng-show="alert.isApprovedFail">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								<strong>Unfortunately!</strong> We cannot seem to update the audit status right now<br/>
+								We advise that you contact your mentee directly to give further instructions. 
+							</div>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-success" data-ng-click="doApproval()" value="Confirm Audit Approval" data-ng-disabled="approvalForm.$invalid"/>
+							<input type="button" class="btn btn-primary" data-ng-click="doPrint()" value="Generate Report" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade review-window" id="reject-panel" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" data-aria-hidden="true" style="background: red">&times;</button>
+							<h3 class="darkslate-font" style="font-family: cambria">Audit Rejection</h3>
+						</div>
+						<div class="modal-body">
+							<div data-ng-form="rejectionForm" role="form">
+								<div class="form-group">
+									<label for="commentBox">Please leave a Comment (<span class="red-font">It is Required!</span>)</label>
+									<textarea class="form-control" name="comments" row="5" col="10" data-ng-model="RejectionComments" required></textarea>
+								</div>
+							</div>
+							<div class="alert alert-success alert-dismissable" data-ng-show="alert.isRejectOK">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								<strong>Done!</strong> Audit Status Update was successful. Audit Rejected! 
+							</div>
+							<div class="alert alert-warning alert-dismissable" data-ng-show="alert.isRejectFail">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								<strong>Unfortunately!</strong> We cannot seem to update the audit status right now<br/>
+								We advise that you contact your mentee directly to give further instructions.  
+							</div>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-danger" data-ng-click="doRejection()" value="Confirm Audit Rejection" data-ng-disabled="rejectionForm.$invalid"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="display:none;" id="report">
+				<div class="table-responsive" id="report1">
+					<table class="table table-striped table-hover">
+						<tr>
+							<th>Name</th>
+							<td data-ng-bind="profileData.name"></td>
+							<th>Matric Id</th>
+							<td data-ng-bind="profileData.id"></td>
+						</tr>
+						<tr>
+							<th>Contact No</th>
+							<td><span data-ng-bind="profileData.hp"></span></td>
+							<th>Current CGPA</th>
+							<td data-ng-bind="profileData.currentCgpa"></td>
+						</tr>
+						<tr>
+							<th>Program</th>
+							<td colspan="3" data-ng-bind="profileData.degree"></td>
+						</tr>
+					</table>
+				</div>
+				<div class="table-responsive" id="report2">
+					<table class="table table-striped table-hover">
+						<tr>
+							<th>Intake</th>
+							<td data-ng-bind="profileData.intake"></td>
+							<th>Program Type</th>
+							<td data-ng-bind="profileData.program"></td>
+						</tr>
+						<tr>
+							<th>Graduating Session</th>
+							<td data-ng-bind="audit.gradSession"></td>
+							<th>Total Semester Taken</th>
+							<td data-ng-bind="audit.totalSem"></td>
+						</tr>
+						<tr>
+							<th>Extended Semester?</th>
+							<td data-ng-bind="audit.extSem"></td>
+							<th>CT/CE Remark</th>
+							<td data-ng-pluralize data-count="audit.cectRemark" data-when="{'0': 'No Remarks', '1': 'Yes'}"></td>
+						</tr>
+						<tr>
+							<th>SPM Result</th>
+							<td data-ng-bind="audit.spmResult"></td>
+							<th>MUET Result</th>
+							<td data-ng-bind="audit.muetResult"></td>
+						</tr>
+					</table>
+				</div>
+				<div class="table-responsive" id="report3">
+					<table class="table table-condensed table-hover table-striped table-bordered table-condensed">
+						<thead>
+							<tr class="white-font" style="background-color: rgb(49,79,79)">
+								<th colspan="10">Students Results For All Course Taken</th>
+							</tr>
+							<tr style="background-color: #d9edf7">
+								<th>#</th>
+								<th>Semester</th>
+								<th>Course ID</th>
+								<th>Course Name</th>
+								<th>Grade</th>
+								<th>Grade Point</th>
+								<th>Credit Hours</th>
+								<th>Course Point</th>
+								<th>Cummulative Point</th>
+								<th>Cummulative Hour</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr data-ng-repeat="data in courseResults" data-ng-class-even="'success'" class="text-center">
+								<td data-ng-bind="$index + 1"></td>
+								<td data-ng-bind="data.semId"></td>
+								<td data-ng-bind="data.courseId"></td>
+								<td data-ng-bind="data.description"></td>
+								<td data-ng-bind="data.grade"></td>
+								<td data-ng-bind="data.gradePoint"></td>
+								<td data-ng-bind="data.creditHours"></td>
+								<td data-ng-bind="data.totalGrade"></td>
+								<td data-ng-bind="data.cummulativePoint"></td>
+								<td data-ng-bind="data.cummulativeHour"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="table-responsive"id="report4">
+					<table class="table table-striped table-hover">
+						<tr>
+							<th>Total Credit Passed</th>
+							<td data-ng-bind="profileData.creditHoursTaken"></td>
+						</tr>
+						<tr>
+							<th>Total Credit Exempted</th>
+							<td data-ng-bind="audit.totalCreditExempted"></td>
+						</tr>
+						<tr>
+							<th>Total Credit Earned</th>
+							<td data-ng-bind="profileData.creditHoursTaken + audit.totalCreditExempted"></td>
+						</tr>
+						<tr>
+							<th>Total Credit Required</th>
+							<td data-ng-bind="profileData.totalDegreeUnits"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
