@@ -9,3 +9,6 @@ uploads/
 
 *.class
 
+WEB-INF/appengine-web.xml
+WEB-INF/classes/META-INF/context.xml
+WEB-INF/classes/com/auditsys/FA2S_VER2.0.gwt.xml
