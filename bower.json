@@ -1,0 +1,36 @@
+{
+  "name": "auditSys",
+  "version": "1.0.0",
+  "description":"A prototype web application developed for automating sequence of events ensued in student's academi audit",
+  "dependencies": {
+    "angular": "~1.2.6",
+    "angular-route": "~1.2.6",
+    "angular-cookies": "~1.2.6",
+    "angular-animate": "~1.2.6",
+    "angular-sanitize":"~1.2.6",
+    "moment": "~2.3.1",
+    "jquery": "~1.10.2",
+    "lodash": "~2.4.1",
+    "bootstrap":"~3.0.3",
+    "jquery-colorbox":"~1.4.33",
+    "dropzone":"~3.7.1",
+    "es5-shim":"~2.1.0",
+    "fancybox":"~2.1.5",
+    "json3": "~3.2.6",
+    "jspdf": "~1.0.272"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.6",
+    "angular-scenario": "~1.2.6"
+  },
+  "authors":"Mustapha Taiwo <mustytaiwo@gmail.com> (http://about.me/mustaphataiwo)",
+  "homepage": "https://github.com/ominira/AcademicAudit",
+  "repository":{
+    "type": "git",
+    "url": "git@github.com:Ominira/AcademicAudit.git"
+  },
+  "private": false,
+  "keyword": [
+    "audit system","degree audit","academic audit"
+  ]
+}
