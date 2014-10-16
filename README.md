@@ -1,7 +1,7 @@
-AcademicAudit
-=============
+Academic Audit
+==============
 
-This is a complete web app/system initially created to automate the sequence of events ensued in student's academic/degree audit at the University level.
+This is a prototype web app/system created to automate the sequence of events ensued in student's academic/degree audit at the University level.
 
 
 #### Server Environment:
@@ -12,14 +12,14 @@ This is a complete web app/system initially created to automate the sequence of 
 #### Machine Environment
 
 - Java JDK 1.7.0_21
-- Ant 1.9.1 (sometimes comes with the tomcat installation itself)
-- MySQL Workbench 6.0 ( or whatever mysql server manager suits the team, phpmyadmin or the likes)
+- Ant 1.9.1
+- MySQL Workbench 6.0 ( or whatever mysql server gui manager suits, phpmyadmin or the likes)
 
 #### Back-end:
 
 Completely Java
 
-libraries currently used (custom .jar files):
+libraries currently used (custom .jar files). 
 Most, if not all, are currently contained in the WEB-INF/lib folder
 
 File Upload:
@@ -45,23 +45,20 @@ Expression Language Support (Java Standard Tag Lib):
 
 Still JSP, but...
 
-AngularJS Driven (http://angularjs.org/)
-Used for developing HTML5 Single Web Page Application and more. More details on the angularjs website.
-
-JavaScript Libraries Used:
+[AngularJS](http://angularjs.org/) Driven.
 
 Angular Modules:
-- angular-animate - for animations
-- angular-route - for page routing
-- angular-sanitize - to ensure security and prevent XSS attacks
-- angular-scenario - for testing (didn't get around to really use it).
+- angular-animate
+- angular-route
+- angular-sanitize
+- angular-scenario
 
 JS Utilities:
-- jQuery
-- Bootstrap
-- lodash.js - http://lodash.com/
-- moment.js - http://momentjs.com/
-- dropzone.js - http://www.dropzonejs.com/
+- [jQuery](http://jquery.com/)
+- [Bootstrap](http://getbootstrap.com/)
+- [Lodash](http://lodash.com/)
+- [Moment](http://momentjs.com/)
+- [DropZone](http://www.dropzonejs.com/)
 
 - google jsapi - graph chart draw
 - Light-box JS libraries - fancybox, colorbox
@@ -70,15 +67,16 @@ JS Utilities:
 - es5-shim
 
 CSS Utils:
-Bootstrap  - for the little things
+- Bootstrap - for the little things
 
 #### Current Test Site
 http://academicaudit.ominira.cloudbees.net/
-expires Dec 31, 2014
+
+link expires Dec 31, 2014
 
 Usable Login Credentials:
 
-user: user1 || lecturer1
-password: user1 || lecturer1
+- Student: userame -> user1, password -> user1
+- Lecturer userame -> lecturer1, password -> lecturer1
 
 
