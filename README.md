@@ -47,12 +47,6 @@ Still JSP, but...
 
 [AngularJS](http://angularjs.org/) Driven.
 
-Angular Modules:
-- angular-animate
-- angular-route
-- angular-sanitize
-- angular-scenario
-
 JS Utilities:
 - [jQuery](http://jquery.com/)
 - [Bootstrap](http://getbootstrap.com/)
@@ -72,10 +66,11 @@ CSS Utils:
 #### Installation
 - Pull into server Webapp folder
 - Update dbHelper java source file with mysql credentials (check under the shared folder in WEB-INF/classes).
-- compile java source files in WEB-INF/classes (left there for easy compilation).
-- create database db_faas in mysql instance.
-- import sql file into db_faas database, to be found in resource/db_faas.sql.
-- start server, and navigate to directory.
+- Compile java source files in WEB-INF/classes (left there for easy compilation).
+- Create database db_faas in mysql instance.
+- Import sql file into db_faas database, to be found in resource/db_faas.sql.
+- Do a bower install in project dir. (You do require having nodejs installed on your machine to make that happen)
+- Start tomcat server, and navigate to project directory in browser.
 - Additional configurations might be required based on your environment settings.
 
 #### Current Test Site
